@@ -1,4 +1,5 @@
-﻿$ConnectionString = "Server=BEIJINGSQL01\apps,2510;Database=SPIN;Integrated Security=True"
+#replace with your SQL connection info. Make sure you replace 1433 with the appropriate port.
+$ConnectionString = "Server=SQLSERVER\INSTANCENAME,1433;Database=SPIN;Integrated Security=True"
 
 function invoke-SQLqry{
 <# 
