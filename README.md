@@ -1,28 +1,14 @@
 # StatePassiveInstrumentationNode
-State Passive Instrumentation Node (SPIN)
+State Passive Instrumentation Node (SPIN) - PowerShell Version
 
-Philip Tong of US Consulate Hong Kong is credited with popularizing the code that has become SPIN - State Passive Instrumentation Node - or just sometimes Dashboard.
+Rough proof of concept for PowerShell backend.  
 
-The dashboard is an .ASP script that runs on your webserver and provides basic information in a single glance about the status of your servers, your network - switches, circuits, etc.
+To test:
 
-We are working on getting more documentation, general data, etc. Feel free to contribute!
+Run New_Spin.SQL on your SQL server to create SQL DB.
 
-_____________________________________________________________________
-For SPIN to work: 
+Edit $ConnectionString variable in both ImportNodesFromAD.ps1 and PingUpdate.ps1.
 
-1) Install into your webroot dir on your webserver and create a website for it. The app pools under IIS7 (including the default app pool) need to use the domain IUSR account.
+Run ImportNodesFromAD.ps1 to add all your servers from AD to the DB.
 
-2) Please use the local GP editor to add the domain\Iuser account to each server's local security policies as follows:
-Local Computer Policy (group policy editor)
-[Console Root\Local Computer Policy\Computer Configuration\Windows Settings\Security Settings\Local Policies\User Rights Assignment]
-
-    access this computer from the network
-    adjust memory quotas for a process
-    Allow logon on locally
-    Generate security audit
-    Impersonate a client after authentication
-    logon as a batch job
-    logon as a service
-    replace a process level token
-<br>
-Make certain that your app pools are also using the domain\iusr account, and not the local servers. ** Make certain that the domain IUSR account has permissions to the SPIN directory **
+Run PingUpdate.ps1 to ping all servers and update the DB--this could be configured to either loop or run as a scheduled task.
